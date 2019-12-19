@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react';
+import './App.css'
+import {Container} from "reactstrap";
+import Navigation from "./components/UI/Navigation/Navigation";
+import {Route, Switch} from "react-router";
+import Home from "./container/Home";
+import NewPost from "./container/NewPost";
+import SinglePost from "./container/SinglePost";
+import RefactorPost from "./container/RefactorPost";
+import AboutUs from "./container/AboutUs";
+import Contact from "./container/Contact";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Fragment>
+            <Navigation/>
+            <Container>
+                <Switch>
+                    <Route path={"/"} exact component={Home}/>
+                    <Route path={"/aboutUs"} exact component={AboutUs}/>
+                    <Route path={"/contact"} exact component={Contact}/>
+                    <Route path={"/posts/new"} component={NewPost}/>
+                    <Route path={"/post/:id"} component={SinglePost}/>
+                    <Route path={"/posts/:id/edit"} component={RefactorPost}/>
+                    <Route render={() => <h1>Not Fount</h1>}/>
+                </Switch>
+            </Container>
+        </Fragment>
+
+    );
 }
 
 export default App;
